@@ -19,7 +19,7 @@ $(function(){
  
       let sesion = getSesion();
         if(sesion){
-          console.log(sesion);
+
             let nombres = sesion.persona.nombres + ' ' + sesion.persona.apellidos;
 
             $('#sesion-usuario').html(nombres);

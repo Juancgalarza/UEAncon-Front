@@ -1,11 +1,17 @@
 <main class="app-content">
 
     <style>
+    table.table-bordered.dataTable tbody td {
+        white-space: nowrap !important;
+        font-size: 13px !important;
+    }
+
     .box-img-usuario {
-        width: 88px;
-        height: 90px;
+        width: 40px;
+        height: 40px;
         overflow: hidden;
-        text: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .box-img-usuario>img {
@@ -17,63 +23,42 @@
     <div class="app-title">
         <div>
             <h1><i class="fa fa-users"></i> Listar Usuario</h1>
-            <!-- <p>Sample forms</p> -->
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item">Gestión de Usuarios</li>
-            <li class="breadcrumb-item"><a href="#">Listar Usuario</a></li>
+            <li class="breadcrumb-item"><a href="<?=BASE?>usuario/listar">Listar Usuario</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-12">
-                    <a class="btn btn-primary" href="<?=BASE?>usuario/nuevo">
-                        <i class="fa fa-hand-pointer-o mr-2"></i>
-                        Agregar Usuario</a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">Usuarios</h3>
+                            <h3 class="card-title">Listado de Usuarios</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="div" style="overflow: auto;">
-                                <table id="tabla-usuario" class="table table-bordered table-striped table-sm text-center">
+                            <div style="overflow: auto;">
+                                <table id="tabla-usuario"
+                                    class="table table-bordered table-striped table-sm text-center">
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
                                             <th>Imagen</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
+                                            <th>Celular</th>
+                                            <th>Dirección</th>
                                             <th>Usuario</th>
-                                            <th>Cargo</th>
+                                            <th>Correo</th>
+                                            <th>Rol</th>
+                                            <th>Sexo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!--  <tr>
-                                            <td class="pt-25">1</td>
-                                            <td class="pt-25">imagen.jpg</td>
-                                            <td class="pt-25">Burro</td>
-                                            <td class="pt-25">Hourse</td>
-                                            <td class="pt-25">Bu</td>
-                                            <td class="pt-25">Tuuu crees</td>
-                                            <td class="pt-25">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-warning  fa-lg">
-                                                        <i class="fa fa-pencil-square fa-lg"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger fa-lg">
-                                                        <i class="fa fa-trash fa-lg"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr> -->
                                         </tfoot>
                                 </table>
                             </div>
@@ -81,7 +66,6 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
-
             </div>
             <!-- /.row -->
 
@@ -93,7 +77,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Actualizar Usuario</h4>
+                    <h4 class="modal-title text-light">Actualizar Usuario</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -121,23 +105,43 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6 form-group">
+                                    <label for="">Sexo</label>
+                                    <select id="upd-sexo" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-6 form-group">
+                                    <label for="">Celular</label>
+                                    <input id="upd-celular" type="text" class="form-control numeros-vd">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 form-group">
                                     <label for="">Usuario</label>
                                     <input id="upda-usuario" type="text" class="form-control">
                                 </div>
                                 <input type="hidden" id="rol-id">
                                 <div class="col-12 col-md-6 form-group">
                                     <label for="">Roles</label>
-                                    <select id="upd-cargo" class="form-control">
-                                        <!-- <option value="0">Seleccione un Cargo</option> -->
+                                    <select id="upd-cargo" class="form-control" disabled>
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-12 col-md-6 form-group">
+                                    <label for="">Correo</label>
+                                    <input id="upd-correo" type="text" class="form-control">
+                                </div>
+                                <div class="col-12 col-md-6 form-group">
+                                    <label for="">Dirección</label>
+                                    <textarea id="upd-direccion" class="form-control" rows="2"
+                                        placeholder="Escribir su dirección"></textarea>
+                                </div>
+                            </div>
                         </form>
                         <div class="row">
                             <div class="col-12">
                                 <button id="btn-update" class="btn btn-primary"><i
-                                        class="fas fa-pencil-alt mr-2"></i>Actualizar</button>
+                                        class="fa fa-pencil-square mr-2"></i>Actualizar</button>
                             </div>
                         </div>
                     </div>
@@ -149,7 +153,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
 </main>
 
 <script src="<?=BASE?>views/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -161,5 +164,4 @@
 <script src="<?=BASE?>views/plugins/jszip/jszip.min.js"></script>
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
-
-<script src="<?=BASE?>views/dist/js/scripts/listaUsuario.js?ver=1.1.1.2"></script>
+<script src="<?=BASE?>views/dist/js/scripts/listaUsuario.js?ver=1.1.1.4"></script>
