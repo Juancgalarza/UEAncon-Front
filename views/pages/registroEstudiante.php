@@ -37,33 +37,33 @@
             </div>
             <div class="tile">
                 <div class="tile-body">
-                    <form id="form-nuevo-usuario" method="POST" class="form-horizontal">
+                    <form id="form-nuevo-estudiante" method="POST" class="form-horizontal">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <label for="cedula" class="control-label col-md-2">Cédula</label>
+                                    <label for="est-cedula" class="control-label col-md-2">Cédula</label>
                                     <div class="col-md-4">
                                         <input class="form-control soloNumeros" type="text" maxlength="10"
-                                            minlength="10" id="cedula" name="cedula">
+                                            minlength="10" id="est-cedula" name="cedula">
                                     </div>
-                                    <label for="persona-nombres" class="control-label col-md-2">Nombre</label>
+                                    <label for="est-nombres" class="control-label col-md-2">Nombre</label>
                                     <div class="col-md-4">
                                         <input class="form-control letras-vd" type="text" maxlength="100" minlength="3"
-                                            id="persona-nombres" name="nombres">
+                                            id="est-nombres" name="nombres">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <label for="persona-apellidos" class="control-label col-md-2">Apellido</label>
+                                    <label for="est-apellidos" class="control-label col-md-2">Apellido</label>
                                     <div class="col-md-4">
                                         <input class="form-control letras-vd" type="text" maxlength="100" minlength="3"
-                                            id="persona-apellidos" name="apellidos">
+                                            id="est-apellidos" name="apellidos">
                                     </div>
-                                    <label for="persona-telefono" class="control-label col-md-2">Celular</label>
+                                    <label for="est-telefono" class="control-label col-md-2">Celular</label>
                                     <div class="col-md-4">
                                         <input class="form-control numeros-vd" type="text" maxlength="10" minlength="10"
-                                            id="persona-telefono">
+                                            id="est-telefono">
                                     </div>
                                 </div>
                             </div>
@@ -71,13 +71,13 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-2">Sexo</label>
                                     <div class="col-md-4">
-                                        <select id="select-sexo" class="form-control">
+                                        <select id="select-sexo-est" class="form-control">
 
                                         </select>
                                     </div>
-                                    <label for="persona-correo" class="control-label col-md-2">Correo</label>
+                                    <label for="est-correo" class="control-label col-md-2">Correo</label>
                                     <div class="col-md-4">
-                                        <input class="form-control col-md-12" type="text" id="persona-correo">
+                                        <input class="form-control col-md-12" type="text" id="est-correo">
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-2">Dirección</label>
                                     <div class="col-md-4">
-                                        <textarea id="persona-direccion" class="form-control col-md-12"
+                                        <textarea id="est-direccion" class="form-control col-md-12"
                                             rows="2"></textarea>
                                     </div>
                                 </div>
@@ -96,12 +96,12 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-2">Usuario</label>
                                     <div class="col-md-4">
-                                        <input class="form-control" id="usuario-us" type="text">
+                                        <input class="form-control" id="usuario-est" type="text">
                                     </div>
 
-                                    <label for="img-usuario" class="control-label col-md-2">Subir Imagen</label>
+                                    <label for="img-est" class="control-label col-md-2">Subir Imagen</label>
                                     <div class="col-md-4">
-                                        <input class="form-control" type="file" id="img-usuario">
+                                        <input class="form-control" type="file" id="img-est">
                                     </div>
                                 </div>
                             </div>
@@ -109,13 +109,13 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-2">Curso</label>
                                     <div class="col-md-4">
-                                        <select id="select-curso" class="form-control">
+                                        <select id="select-curso-est" class="form-control">
 
                                         </select>
                                     </div>
                                     <label class="control-label col-md-2">Paralelo</label>
                                     <div class="col-md-4">
-                                        <select id="select-paralelo" class="form-control">
+                                        <select id="select-paralelo-est" class="form-control">
 
                                         </select>
                                     </div>
@@ -125,11 +125,11 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-2">Contraseña</label>
                                     <div class="col-md-4">
-                                        <input class="form-control" id="usuario-clave" type="password">
+                                        <input class="form-control" id="est-clave" type="password">
                                     </div>
                                     <label class="control-label col-md-2">Confirmar Contraseña</label>
                                     <div class="col-md-4">
-                                        <input class="form-control" id="usuario-conf-clave" type="password">
+                                        <input class="form-control" id="est-conf-clave" type="password">
                                     </div>
                                 </div>
                             </div>
@@ -151,3 +151,5 @@
         </div>
     </body>
 </div>
+
+<script src="<?=BASE?>views/dist/js/scripts/registroEstudiante.js?ver=1.1.1.2"></script>
