@@ -37,7 +37,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Perìodos</th>
+                                <th>Períodos</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -53,10 +53,29 @@
                 <h3 class="tile-title">Nuevo Curso</h3>
                 <div class="tile-body">
                     <form method="POST" id="form-nuevo-curso">
-                        <div class="form-group">
-                            <label for="">Curso</label>
-                            <input type="text" class="form-control letras-vd" placeholder="Ejemplo: Primero"
-                                id="form-curso">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Curso</label>
+                                    <input type="text" class="form-control letras-vd" placeholder="Ejemplo: Primero"
+                                        id="form-curso">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Jornada</label>
+                                    <select id="select-jornada" class="form-control">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Capacidad</label>
+                                    <input type="text" class="form-control numeros-vd" placeholder="Ejemplo: 100"
+                                        id="form-capacidad">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-end">
@@ -74,6 +93,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Curso</th>
+                                <th>Jornada</th>
+                                <th>Capacidad</th>
+                                <th>Total Estudiantes</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -122,7 +144,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-12 col-md-6">
             <div class="tile">
                 <h3 class="tile-title">Nueva Materia</h3>
@@ -167,7 +188,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="modalMateriaLabel">Actualizar Período</h5>
+                    <h5 class="modal-title text-light" id="modalMateriaLabel">Actualizar Período</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -204,7 +225,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="modalMateriaLabel">Actualizar Curso</h5>
+                    <h5 class="modal-title text-light" id="modalMateriaLabel">Actualizar Curso</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -219,6 +240,17 @@
                                         <label for="">Curso</label>
                                         <input type="text" class="form-control letras-vd" placeholder="Ejemplo: Primero"
                                             id="upd-form-curso">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Jornada</label>
+                                        <select id="upd-jornada" class="form-control">
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Capacidad</label>
+                                        <input type="text" class="form-control numeros-vd"
+                                            placeholder="Ejemplo: 100" id="upd-form-capacidad">
                                     </div>
                                 </form>
                                 <div class="row">
@@ -241,7 +273,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="modalMateriaLabel">Actualizar Paralelo</h5>
+                    <h5 class="modal-title text-light" id="modalMateriaLabel">Actualizar Paralelo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -278,7 +310,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="modalMateriaLabel">Actualizar Materia</h5>
+                    <h5 class="modal-title text-light" id="modalMateriaLabel">Actualizar Materia</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -291,7 +323,8 @@
                                 <form method="POST" id="update-nuevo-materia">
                                     <div class="form-group">
                                         <label for="">Materia</label>
-                                        <input type="text" class="form-control" placeholder="Ejemplo: Matemáticas" id="upd-form-materia">
+                                        <input type="text" class="form-control" placeholder="Ejemplo: Matemáticas"
+                                            id="upd-form-materia">
                                     </div>
                                 </form>
                                 <div class="row">

@@ -16405,9 +16405,9 @@ be a descendant of the grid when it is being dragged.
 }
 
 .login-content .login-box .login-head {
-  margin-top: -28px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-top: -32px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #ddd;
   text-align: center;
 }
@@ -16432,6 +16432,7 @@ be a descendant of the grid when it is being dragged.
 
 .login-content .login-box .btn-container {
   margin-bottom: 0;
+  margin-top: -10px;
 }
 
 .login-content .login-box .login-form, .login-content .login-box .forget-form {

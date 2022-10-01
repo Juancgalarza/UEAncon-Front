@@ -10,6 +10,9 @@
     }else
     if(isset($_GET['url']) && $_GET['url'] == 'login'){
         require_once 'views/pages/login.php';
+    }else
+    if(isset($_GET['url']) && $_GET['url'] == 'registroEstudiante'){
+        require_once 'views/pages/registroEstudiante.php';
     }
     else{
         $controller = new Controller();

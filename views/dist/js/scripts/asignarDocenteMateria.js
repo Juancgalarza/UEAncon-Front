@@ -3,16 +3,55 @@ var tabla;
 _init();
 
 function _init() {
+    cargarPeriodos();
     abrirModalDocente();
     listarDocentes();
     abrirModalMateria();
-    listarMaterias();
     abrirModalCurso();
     listarCursos();
     abrirModalParalelo();
     listarParalelos();
     guardarAsignacion();
+    changeSelectPeriodo();
     listarAsignaciones();
+}
+
+function cargarPeriodos() {
+    $.ajax({
+        // la URL para la petición
+        url: urlServidor + 'periodo/listar',
+        // especifica si será una petición POST o GET
+        type: 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+        success: function (response) {
+            if (response.status) {
+                let option = '<option value=0>Seleccione un Período</option>';
+
+                response.periodo.forEach(element => {
+                    option += `<option value=${element.id}>${element.periodo}</option>`;
+                });
+                $('#select-periodo').html(option);
+                $('#select-periodo-visualizar').html(option);
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No hay periodos disponibles',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                })
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete: function (jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+
+    });
+
 }
 
 function abrirModalDocente() {
@@ -94,7 +133,7 @@ function abrirModalMateria() {
     });
 }
 
-function listarMaterias() {
+/* function listarMaterias() {
     tabla = $('#tabla-materias').DataTable({
         "lengthMenu": [5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -159,7 +198,7 @@ function listarMaterias() {
 
         }//cerrando language
     });
-}
+} */
 
 function abrirModalCurso() {
     $('#btn-modal-curso').click(function(){
@@ -331,6 +370,95 @@ function seleccionarDocente(id){
     $('#modalDocente').modal('hide');
 }
 
+function seleccionarCurso(id){
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'curso/listar/' + id,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            if(response.status){
+                $('#curso-id').val(response.curso.id);
+                $('#curso-texto').val(response.curso.nombre_curso);
+
+                tabla = $('#tabla-materias').DataTable({
+                    "lengthMenu": [5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
+                    "responsive": true, "lengthChange": false, "autoWidth": false,
+                    "aProcessing": true,//Activamos el procesamiento del datatables
+                    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+                    "ajax":
+                    {
+                        url: urlServidor + 'curso_materia/datatableMateriaxCurso/' + response.curso.id,
+                        type: "get",
+                        dataType: "json",
+                        error: function (e) {
+                            console.log(e.responseText);
+                        }
+                    },
+                    destroy: true,
+                    "iDisplayLength": 5,//Paginación
+                    "language": {
+            
+                        "sProcessing": "Procesando...",
+            
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+            
+                        "sZeroRecords": "No se encontraron resultados",
+            
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+            
+                        "sInfo": "Mostrando un total de _TOTAL_ registros",
+            
+                        "sInfoEmpty": "Mostrando un total de 0 registros",
+            
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            
+                        "sInfoPostFix": "",
+            
+                        "sSearch": "Buscar:",
+            
+                        "sUrl": "",
+            
+                        "sInfoThousands": ",",
+            
+                        "sLoadingRecords": "Cargando...",
+            
+                        "oPaginate": {
+            
+                            "sFirst": "Primero",
+            
+                            "sLast": "Último",
+            
+                            "sNext": "Siguiente",
+            
+                            "sPrevious": "Anterior"
+            
+                        },
+            
+                        "oAria": {
+            
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            
+                        }
+            
+                    }//cerrando language
+                });
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+    $('#modalCurso').modal('hide');
+}
+
 function seleccionarMateria(id){
     $.ajax({
         // la URL para la petición
@@ -353,30 +481,6 @@ function seleccionarMateria(id){
         }
     });
     $('#modalMateria').modal('hide');
-}
-
-function seleccionarCurso(id){
-    $.ajax({
-        // la URL para la petición
-        url : urlServidor + 'curso/listar/' + id,
-        // especifica si será una petición POST o GET
-        type : 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType : 'json',
-        success : function(response) {
-            if(response.status){
-                $('#curso-id').val(response.curso.id);
-                $('#curso-texto').val(response.curso.nombre_curso);
-            }
-        },
-        error : function(jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete : function(jqXHR, status) {
-            // console.log('Petición realizada');
-        }
-    });
-    $('#modalCurso').modal('hide');
 }
 
 function seleccionarParalelo(id){
@@ -405,11 +509,21 @@ function seleccionarParalelo(id){
 
 function guardarAsignacion(){
     $('#asignar-docente-materia').click(function(){  
+        let periodo_id = $('#select-periodo option:selected').val();
         let docente_id = $('#docente-id').val();
         let materia_id = $('#materia-id').val();
         let curso_id = $('#curso-id').val();
         let paralelo_id = $('#paralelo-id').val();
 
+        if(periodo_id == 0){
+            Swal.fire({
+                title: 'Docente - Materia',
+                text: 'Debe seleccionar un Período',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
         if(docente_id.length == 0){
             Swal.fire({
                 title: 'Docente - Materia',
@@ -448,6 +562,7 @@ function guardarAsignacion(){
         }else{
            let json = {
                 docente_materia: {
+                    periodo_id,
                     docente_id,
                     materia_id,
                     curso_id,
@@ -479,7 +594,8 @@ function guardandoAsignacion(json){
                     confirmButtonColor: '#004a43'
                 });
                 reset();
-                listarAsignaciones();
+                let periodo_id_v = response.docente_materia.periodo_id;
+                listarAsignaciones(periodo_id_v);
             }else{
                 Swal.fire({
                     title: 'Docente - Materia',
@@ -500,6 +616,7 @@ function guardandoAsignacion(json){
 }
 
 function reset(){ 
+    $('#select-periodo').prop('selectedIndex',0);
     $('#docente-id').val('');
     $('#docente-texto').val('');
     $('#materia-id').val('');
@@ -510,7 +627,14 @@ function reset(){
     $('#paralelo-id').val('');
 }
 
-function listarAsignaciones() {
+function changeSelectPeriodo(){
+    $('#select-periodo-visualizar').change(function(){
+        let periodo_id = $('#select-periodo-visualizar option:selected').val();
+        listarAsignaciones(periodo_id);
+    });
+}
+
+function listarAsignaciones(periodo_id) {
     tabla = $('#tabla-asignacion').DataTable({
         "lengthMenu": [5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -518,7 +642,7 @@ function listarAsignaciones() {
         "aServerSide": true,//Paginación y filtrado realizados por el servidor
         "ajax":
         {
-            url: urlServidor + 'docente_materia/datatableAsignaciones',
+            url: urlServidor + 'docente_materia/datatableAsignaciones/' + periodo_id,
             type: "get",
             dataType: "json",
             error: function (e) {
@@ -594,7 +718,8 @@ function eliminarDocenteMateria(id){
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#004a43'
                 });
-                listarAsignaciones();
+                let periodo_id_v = response.docente_materia.periodo_id;
+                listarAsignaciones(periodo_id_v);
             }
         },
         error : function(jqXHR, status, error) {

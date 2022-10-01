@@ -2,6 +2,7 @@
 _init();
 
 function _init() {
+    cargarJornadas();
     guardarNuevoPeriodo();
     listarPeriodos();
     guardarNuevoCurso();
@@ -14,6 +15,44 @@ function _init() {
     actualizarCursos();
     actualizarParalelos();
     actualizarMaterias();
+}
+
+function cargarJornadas() {
+    $.ajax({
+        // la URL para la petición
+        url: urlServidor + 'jornada/listar',
+        // especifica si será una petición POST o GET
+        type: 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+        success: function (response) {
+            if (response.status) {
+                let option = '<option value=0>Seleccione una Jornada</option>';
+
+                response.jornada.forEach(element => {
+                    option += `<option value=${element.id}>${element.jornada}</option>`;
+                });
+                $('#select-jornada').html(option);
+                $('#upd-jornada').html(option);
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No hay jornadas disponibles',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                })
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete: function (jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+
+    });
+
 }
 
 function guardarNuevoPeriodo() {
@@ -85,6 +124,8 @@ function guardarNuevoCurso() {
         e.preventDefault();
 
         let nombre_curso = $('#form-curso').val();
+        let jornada_id = $('#select-jornada option:selected').val();
+        let capacidad = $('#form-capacidad').val();
 
         if (nombre_curso.length == 0) {
             Swal.fire({
@@ -94,10 +135,28 @@ function guardarNuevoCurso() {
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
             });
+        } else if (jornada_id == 0) {
+            Swal.fire({
+                title: 'Cursos',
+                text: 'Debe seleccionar una Jornada',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        } else if (capacidad.length == 0) {
+            Swal.fire({
+                title: 'Cursos',
+                text: 'Debe ingresar una Capacidad',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
         } else {
             let json = {
                 curso: {
-                    nombre_curso
+                    jornada_id,
+                    nombre_curso,
+                    capacidad
                 }
             };
             guardandoCurso(json);
@@ -498,6 +557,8 @@ function cargarCursos(id){
             if(response.status){
                 $('#curso-id').val(response.curso.id);
                 $('#upd-form-curso').val(response.curso.nombre_curso);
+                $('#upd-form-capacidad').val(response.curso.capacidad);
+                $('#upd-jornada').val(response.curso.jornada.id);
             }
         },
         error : function(jqXHR, status, error) {
@@ -680,11 +741,15 @@ function actualizarCursos(){
     $('#btn-update-curso').click(function(){
         let id = $('#curso-id').val();
         let nombre_curso = $('#upd-form-curso').val();
+        let jornada_id = $('#upd-jornada option:selected').val();
+        let capacidad = $('#upd-form-capacidad').val();
         
             let json = {
                 curso: {
                     id:id,
+                    jornada_id: jornada_id,
                     nombre_curso: nombre_curso,
+                    capacidad: capacidad
                 }
             };
 
@@ -703,7 +768,6 @@ function actualizarCursos(){
                              confirmButtonText: 'Ok',
                              confirmButtonColor: '#004a43' 
                         })
-
                         $('#actualizarCurso').modal('hide');
                         listarCursos();
                     }else{

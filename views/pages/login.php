@@ -23,8 +23,13 @@
                     <div class="form-group">
                         <div class="g-recaptcha" data-sitekey="6LcwucIhAAAAAFo8DJbkqNKcXAQUOO06gyGz7g8V"></div>
                     </div>
+                    <div class="form-group">
+                        <div class="utility d-flex justify-content-end">
+                            <p class="semibold-text mb-2"><i class="fa fa-share mr-2"></i><a href="registroEstudiante" data-toggle="flip">Soy Estudiante</a></p>
+                        </div>
+                    </div>
                     <div class="form-group btn-container">
-                        <button type="submit"  class="btn btn-primary btn-block" id="login-ingresar"><i
+                        <button type="submit" class="btn btn-primary btn-block" id="login-ingresar"><i
                                 class="fa fa-sign-in fa-lg fa-fw"></i>Iniciar</button>
                     </div>
                 </form>
@@ -34,6 +39,5 @@
     </body>
 
 </div>
-
 
 <script src="<?=BASE?>views/dist/js/scripts/login.js?ver=1.1.1.9"></script>

@@ -10,54 +10,18 @@
         </ul>
     </div>
 
-    <!-- <div class="row">
-        <div class="col-12 col-md-6">
-            <div class="tile">
-                <h3 class="tile-title mt-1">Listado De Docentes</h3>
-                <input type="hidden" id="docente-id">
-                <div class="tile-body">
-                    <table id="tabla-docentes" class="table table-bordered table-striped table-sm text-center">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Docente</th>
-                                <th>Seleccionar</th>
-                            </tr>
-                        </thead>
-                        <tbody id="docente-body">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="tile">
-                <h3 class="tile-title mt-1">Listado De Materias</h3>
-                <input type="hidden" id="materia-id">
-                <div class="tile-body">
-                    <table id="tabla-materias" class="table table-bordered table-striped table-sm text-center">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Materia</th>
-                                <th>Seleccionar</th>
-                            </tr>
-                        </thead>
-                        <tbody id="materia-body">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3">
             <div class="tile">
-                <h3 class="tile-title mt-1">Asignaciones</h3>
+                <h3 class="tile-title mt-1">Nueva Asignación</h3>
                 <div class="tile-body">
+                    <div class="col-12 form-group">
+                        <label for="">Período Lectivo</label>
+                        <select id="select-periodo" class="form-control">
+
+                        </select>
+                    </div>
+
                     <div class="col-12 d-flex mb-3">
                         <input type="hidden" id="docente-id">
                         <input type="text" class="form-control" placeholder="Docente" readonly id="docente-texto">
@@ -67,17 +31,17 @@
                     </div>
 
                     <div class="col-12 d-flex mb-3">
-                        <input type="hidden" id="materia-id">
-                        <input type="text" class="form-control" placeholder="Materia" readonly id="materia-texto">
-                        <button class="btn btn-primary" id="btn-modal-materia">
+                        <input type="hidden" id="curso-id">
+                        <input type="text" class="form-control" placeholder="Curso" readonly id="curso-texto">
+                        <button class="btn btn-primary" id="btn-modal-curso">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
 
                     <div class="col-12 d-flex mb-3">
-                        <input type="hidden" id="curso-id">
-                        <input type="text" class="form-control" placeholder="Curso" readonly id="curso-texto">
-                        <button class="btn btn-primary" id="btn-modal-curso">
+                        <input type="hidden" id="materia-id">
+                        <input type="text" class="form-control" placeholder="Materia" readonly id="materia-texto">
+                        <button class="btn btn-primary" id="btn-modal-materia">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -101,6 +65,14 @@
             <div class="tile">
                 <h3 class="tile-title mt-1">Lista de Asignaciones</h3>
                 <div class="tile-body">
+                    <div class="row">
+                        <div class="col-12 col-md-5 col-lg-4">
+                            <label for="">Período Lectivo</label>
+                            <select id="select-periodo-visualizar" class="form-control">
+                                
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-12 mt-3">
                             <table id="tabla-asignacion"
@@ -128,8 +100,7 @@
 </main>
 
 <!-- MODAL DOCENTE -->
-<div class="modal fade" id="modalDocente" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-hidden="true">
+<div class="modal fade" id="modalDocente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
