@@ -401,7 +401,7 @@ function guardandoUsuarioEstudiante(json) {
         // el tipo de información que se espera de respuesta
         dataType: 'json',
         success: function (response) {  
-            if (response.status && response.curso.capacidad != response.acumEst) {
+            if (response.status) {
                 Swal.fire({
                     title: 'Estudiantes',
                     text: response.mensaje,
@@ -409,14 +409,12 @@ function guardandoUsuarioEstudiante(json) {
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#004a43'
                 });
-                console.log(response);
                 $('#form-nuevo-estudiante')[0].reset();
                 cargarCursos();
-                $(location).attr('href', urlCliente + 'login');
             }else{
                 Swal.fire({
                     title: 'Estudiantes',
-                    text: 'No hay cupos disponibles para el Curso Escogido',
+                    text: response.mensaje,
                     icon: 'error',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#004a43'
@@ -453,7 +451,7 @@ function guardandoUsuarioEstudiante(json) {
                 //console.log(responseImg);
                 if (responseImg.status) {
                     Swal.fire({
-                        title: 'Usuario',
+                        title: 'Estudiante',
                         text: responseImg.mensaje,
                         icon: 'success',
                         confirmButtonText: 'Ok',
@@ -469,4 +467,5 @@ function guardandoUsuarioEstudiante(json) {
             }
         });
     }
+    $(location).attr('href', urlCliente + 'login');
 }

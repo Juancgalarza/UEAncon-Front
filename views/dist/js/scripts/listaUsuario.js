@@ -195,7 +195,7 @@ function cargarSexos() {
 function cargarCargos() {
     $.ajax({
         // la URL para la petición
-        url: urlServidor + 'rol/listar',
+        url: urlServidor + 'rol/listarSinEstudiante',
         // especifica si será una petición POST o GET
         type: 'GET',
         // el tipo de información que se espera de respuesta
