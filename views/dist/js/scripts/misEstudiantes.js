@@ -8,9 +8,7 @@ function _init() {
     cargarEncabezadoParalelo();
     cargarEstudiantesCursos();
     cargarParciales();
-    cargarQuimestres();
-    cargarTipoActiviades();
-    guardarAsignaciones();
+    guardarCalificaciones();
 }
 
 function cargarEncabezadoMateria(){
@@ -189,80 +187,6 @@ function cargarParciales() {
     });
 }
 
-function cargarQuimestres() {
-    $.ajax({
-        // la URL para la petición
-        url: urlServidor + 'quimestre/listar',
-        // especifica si será una petición POST o GET
-        type: 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType: 'json',
-        success: function (response) {
-            //console.log(response);
-            if (response.status) {
-                let option = '<option value=0>Seleccione un Quimestre</option>';
-
-                response.quimestre.forEach(element => {
-                    option += `<option value=${element.id}>${element.quimestre}</option>`;
-                });
-                $('#select-quimestre').html(option);
-            } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'No hay quimestres disponibles',
-                    icon: 'error',
-                    confirmButtonText: 'Ok',
-                    confirmButtonColor: '#004a43'
-                })
-            }
-        },
-        error: function (jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete: function (jqXHR, status) {
-            // console.log('Petición realizada');
-        }
-
-    });
-}
-
-function cargarTipoActiviades() {
-    $.ajax({
-        // la URL para la petición
-        url: urlServidor + 'tipo_actividades/listar',
-        // especifica si será una petición POST o GET
-        type: 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType: 'json',
-        success: function (response) {
-            //console.log(response);
-            if (response.status) {
-                let option = '<option value=0>Seleccione una Actividad</option>';
-
-                response.tipo.forEach(element => {
-                    option += `<option value=${element.id}>${element.actividad}</option>`;
-                });
-                $('#select-actividad').html(option);
-            } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'No hay actividades disponibles',
-                    icon: 'error',
-                    confirmButtonText: 'Ok',
-                    confirmButtonColor: '#004a43'
-                })
-            }
-        },
-        error: function (jqXHR, status, error) {
-            console.log('Disculpe, existió un problema');
-        },
-        complete: function (jqXHR, status) {
-            // console.log('Petición realizada');
-        }
-
-    });
-}
-
 function calificarEstudiante(id) {
     $('#calificarEstudiante').modal('show');
     cargarDataEstudiante(id);
@@ -280,7 +204,6 @@ function cargarDataEstudiante(id) {
         // el tipo de información que se espera de respuesta
         dataType : 'json',
         success : function(response) {
-            console.log(response);
             if(response.status){
                 $('#estudiante-id').val(response.estudiante[0].id);
                 $('#curso-id').val(response.estudiante[0].curso.id);
@@ -299,7 +222,7 @@ function cargarDataEstudiante(id) {
     });
 }
 
-function guardarAsignaciones(){
+function guardarCalificaciones(){
     $('#btn-calificar').click(function(){
 
         let docente_id = JSON.parse(localStorage.getItem('sesion-docente')); 
@@ -310,43 +233,87 @@ function guardarAsignaciones(){
 
         //detalle
         let parcial_id = $('#select-parcial option:selected').val();
-        let quimestre_id = $('#select-quimestre option:selected').val();
-        let calificacion = $('#calificacion-est').val();
-        let total = 0;
-        total += Number(calificacion);
-        let tipo_actividades_id = $('#select-actividad option:selected').val();
+        let nota1 = $('#nota1-est').val();
+        let nota2 = $('#nota2-est').val();
+        let nota3 = $('#nota3-est').val();
+        let nota4 = $('#nota4-est').val();
+        let nota5 = $('#nota5-est').val();
+        let nota6 = $('#nota6-est').val();
+        let examen = $('#examen-est').val();
+        let totalf = Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4) + Number(nota5) + Number(nota6);
+        let total = totalf.toFixed(2);
+        let promf = total / 6 ;
+        let promedio = promf.toFixed(2);
+        let promedio_total = promedio;
         
         if(parcial_id == 0){
             Swal.fire({
-                title: 'Asignaciones',
+                title: 'Calificaciones',
                 text: 'Debe seleccionar un Parcial',
                 icon: 'warning',
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
             });
         }else
-        if(quimestre_id == 0){
+        if(nota1.length == 0){
             Swal.fire({
-                title: 'Asignaciones',
-                text: 'Debe seleccionar un Quimestre',
-                icon: 'warning',
-                confirmButtonText: 'Ok',
-                confirmButtonColor: '#004a43'
-            });
-        }else
-        if(calificacion.length == 0){
-            Swal.fire({
-                title: 'Asignaciones',
+                title: 'Calificaciones',
                 text: 'Debe ingresar una Calificación',
                 icon: 'warning',
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
             });
-        }else
-        if(tipo_actividades_id == 0){
+        }
+        else
+        if(nota2.length == 0){
             Swal.fire({
-                title: 'Asignaciones',
-                text: 'Debe seleccionar una Actividad',
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación a la Asignación',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota3.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación a la Asignación',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota4.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación a la Asignación',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota5.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación a la Asignación',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota6.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación a la Asignación',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(examen.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación al Exámen',
                 icon: 'warning',
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
@@ -355,30 +322,29 @@ function guardarAsignaciones(){
             let detalles = [];
 
             let aux = {
-                parcial_id, quimestre_id, calificacion, tipo_actividades_id
+                parcial_id, estudiante_id, nota1, nota2, nota3, nota4, nota5, nota6, total, promedio, examen
            };
            detalles.push(aux);
 
             let json = {
-                asignaciones:{
+                calificaciones:{
                     docente_id,
                     materia_id,
-                    estudiante_id,
                     curso_id,
                     paralelo_id,
-                    total,
+                    promedio_total
                 },
-                detalle_asignaciones:detalles
+                detalle_calificaciones:detalles
             }
-            guardandoAsignaciones(json);
+            guardandoCalificaciones(json);
         }
     });
 }
 
-function guardandoAsignaciones(json) {
+function guardandoCalificaciones(json) {
     $.ajax({
         // la URL para la petición
-        url: urlServidor + 'asignaciones/guardarAsignacion',
+        url: urlServidor + 'calificaciones/guardarCalificacion',
         // especifica si será una petición POST o GET
         type: 'POST',
         data: 'data=' + JSON.stringify(json),
@@ -387,7 +353,7 @@ function guardandoAsignaciones(json) {
         success: function (response) {
             if (response.status) {
                 Swal.fire({
-                    title: 'Calificación',
+                    title: 'Calificaciones',
                     text: response.mensaje,
                     icon: 'success',
                     confirmButtonText: 'Ok',
@@ -399,7 +365,7 @@ function guardandoAsignaciones(json) {
                 $('#paralelo-id').val('');
             } else {
                 Swal.fire({
-                    title: 'Calificación',
+                    title: 'Calificaciones',
                     text: response.mensaje,
                     icon: 'error',
                     confirmButtonText: 'Ok',

@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-12">
             <div class="tile">
-                <h4 class="tile-title mt-1 text-center">Estudiantes Matriculados en la Materia <span
+                <h4 class="tile-title mt-1 text-center">Nómina De Estudiantes Matriculados en <span
                         class="text-primary" id="materia-en"></span> - Curso: <span class="text-primary"
                         id="curso-en"></span> Paralelo: <span class="text-primary" id="paralelo-en"></span></h4>
                 <h5 class="text-center">Jornada: <span class="text-primary" id="jornada-en"></span></h5>
@@ -99,39 +99,82 @@
                             <input type="hidden" id="paralelo-id">
                             <form method="POST" id="calificar-estudiante">
                                 <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Parcial</label>
-                                            <select id="select-parcial" class="form-control form-control-sm">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Parcial</label>
+                                            <div class="col-md-5">
+                                                <select id="select-parcial" class="form-control form-control-sm">
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Quimestre</label>
-                                            <select id="select-quimestre" class="form-control form-control-sm">
-
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Calificación</label>
-                                            <input type="text"
-                                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                                                class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
-                                                id="calificacion-est">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Tarea 1</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota1-est">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Actividad</label>
-                                            <select id="select-actividad" class="form-control form-control-sm">
-
-                                            </select>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Tarea 2</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota2-est">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Lección 1</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota3-est">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Lección 2</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota4-est">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Proyecto</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota5-est">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Evaluación</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="nota6-est">
+                                            </div>
+                                        </div>
+                                        <hr class="bg-primary">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Exámen</label>
+                                            <div class="col-md-5">
+                                                <input type="text"
+                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                    id="examen-est">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

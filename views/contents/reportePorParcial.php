@@ -2,11 +2,11 @@
 
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-clipboard"></i> Reporte Por Parcial y Quimestre</h1>
+            <h1><i class="fa fa-clipboard"></i> Reporte Por Parcial</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#"> Reporte Por Parcial y Quimestre</a></li>
+            <li class="breadcrumb-item"><a href="<?=BASE?>reportes/parcial"> Reporte Por Parcial</a></li>
         </ul>
     </div>
 
@@ -14,12 +14,6 @@
         <div class="col-6 col-md-3 col-lg-3 form-group ">
             <label for="">Parciales</label>
             <select id="select-parcial" class="form-control">
-
-            </select>
-        </div>
-        <div class="col-6 col-md-3 col-lg-3 form-group ">
-            <label for="">Quimestres</label>
-            <select id="select-quimestre" class="form-control">
 
             </select>
         </div>
@@ -39,7 +33,7 @@
                 </div>
                 <div class="col-12 col-md-6 text-center">
                     <h3><b>UNIDAD EDUCATIVA "ANCÓN"</b></h3>
-                    <h6>Reporte Por Parcial y Quimestre</h6>
+                    <h6>Reporte Por Parcial</h6>
                 </div>
                 <div class="col-12 col-md-2">
                     <img src="<?=BASE?>views/dist/img/logo.png" width="100px">
@@ -56,8 +50,13 @@
                                         <tr class="bg-light">
                                             <th>#</th>
                                             <th>Materias</th>
-                                            <th>Actividad</th>
-                                            <th>Calificación</th>
+                                            <th>Tarea 1</th>
+                                            <th>Tarea 2</th>
+                                            <th>Lección 1</th>
+                                            <th>Lección 2</th>
+                                            <th>Proyecto</th>
+                                            <th>Evaluación</th>
+                                            <th>Promedio</th>
                                         </tr>
                                     </thead>
                                     <tbody id="body-reporte-data">
@@ -66,7 +65,12 @@
                                     <tfoot>
                                         <th></th>
                                         <th></th>
-                                        <th class="text-primary">Promedio: </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class="text-primary">Promedio General: </th>
                                         <th id="total-prom" class="text-primary"></th>
                                     </tfoot>
                                 </table>
