@@ -3,11 +3,84 @@ var tabla;
 _init();
 
 function _init() {
+    cargarEncabezadoMateria();
+    cargarEncabezadoCurso();
+    cargarEncabezadoParalelo();
     cargarEstudiantesCursos();
     cargarParciales();
     cargarQuimestres();
     cargarTipoActiviades();
     guardarAsignaciones();
+}
+
+function cargarEncabezadoMateria(){
+    let id = localStorage.getItem('_materia_id');
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'materia/listar/' + id,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            if(response.status){
+                $('#materia-en').text('*'+response.materia.nombre_materia+'*');
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+}
+
+function cargarEncabezadoCurso(){
+    let id = localStorage.getItem('_curso_id');
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'curso/listar/' + id,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            if(response.status){
+                $('#curso-en').text('*'+response.curso.nombre_curso+'*');
+                $('#jornada-en').text('*'+response.curso.jornada.jornada+'*');
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+}
+
+function cargarEncabezadoParalelo(){
+    let id = localStorage.getItem('_paralelo_id');
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'paralelo/listar/' + id,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            if(response.status){
+                $('#paralelo-en').text('*'+response.paralelo.tipo+'*');
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
 }
 
 function cargarEstudiantesCursos() {

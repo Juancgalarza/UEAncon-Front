@@ -1,4 +1,19 @@
 <main class="app-content">
+    <style>
+    .box-img-usuario {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .box-img-usuario>img {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    </style>
+
     <div class="app-title">
         <div>
             <h1><i class="fa fa-users"></i> Mis Estudiantes</h1>
@@ -12,17 +27,20 @@
     <div class="row">
         <div class="col-12">
             <div class="tile">
-                <h3 class="tile-title mt-1">Listado De Estudiantes</h3>
+                <h4 class="tile-title mt-1 text-center">Estudiantes Matriculados en la Materia <span
+                        class="text-primary" id="materia-en"></span> - Curso: <span class="text-primary"
+                        id="curso-en"></span> Paralelo: <span class="text-primary" id="paralelo-en"></span></h4>
+                <h5 class="text-center">Jornada: <span class="text-primary" id="jornada-en"></span></h5>
                 <div class="tile-body">
                     <table id="tabla-estudiantes" class="table table-bordered table-striped table-sm text-center">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
+                                <th>Avatar</th>
                                 <th>Cédula</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Curso</th>
-                                <th>Paralelo</th>
+                                <th>Nombre Completo</th>
+                                <th>Celular</th>
+                                <th>Dirección</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -42,7 +60,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title" id="modalMateriaLabel">Calificar Estudiante</h5>
+                <h5 class="modal-title text-light" id="modalMateriaLabel">Calificar Estudiante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
