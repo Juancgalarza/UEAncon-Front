@@ -113,6 +113,19 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group row">
+                                            <label class="col-form-label col-md-4">Quimestre</label>
+                                            <div class="col-md-5">
+                                                <select id="select-quimestre" class="form-control form-control-sm">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="bg-primary" style="margin-top: 0px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
                                             <label class="col-form-label col-md-4">Tarea 1</label>
                                             <div class="col-md-5">
                                                 <input type="text"

@@ -8,6 +8,7 @@ function _init() {
     cargarEncabezadoParalelo();
     cargarEstudiantesCursos();
     cargarParciales();
+    cargarQuimestres();
     guardarCalificaciones();
 }
 
@@ -187,6 +188,43 @@ function cargarParciales() {
     });
 }
 
+function cargarQuimestres() {
+    $.ajax({
+        // la URL para la petición
+        url: urlServidor + 'quimestre/listar',
+        // especifica si será una petición POST o GET
+        type: 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+        success: function (response) {
+            //console.log(response);
+            if (response.status) {
+                let option = '<option value=0>Seleccione un Quimestre</option>';
+
+                response.quimestre.forEach(element => {
+                    option += `<option value=${element.id}>${element.quimestre}</option>`;
+                });
+                $('#select-quimestre').html(option);
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No hay quimestres disponibles',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                })
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete: function (jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+
+    });
+}
+
 function calificarEstudiante(id) {
     $('#calificarEstudiante').modal('show');
     cargarDataEstudiante(id);
@@ -233,6 +271,7 @@ function guardarCalificaciones(){
 
         //detalle
         let parcial_id = $('#select-parcial option:selected').val();
+        let quimestre_id = $('#select-quimestre option:selected').val();
         let nota1 = $('#nota1-est').val();
         let nota2 = $('#nota2-est').val();
         let nota3 = $('#nota3-est').val();
@@ -250,6 +289,15 @@ function guardarCalificaciones(){
             Swal.fire({
                 title: 'Calificaciones',
                 text: 'Debe seleccionar un Parcial',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(quimestre_id == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe seleccionar un Quimestre',
                 icon: 'warning',
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
@@ -322,7 +370,7 @@ function guardarCalificaciones(){
             let detalles = [];
 
             let aux = {
-                parcial_id, estudiante_id, nota1, nota2, nota3, nota4, nota5, nota6, total, promedio, examen
+                parcial_id, quimestre_id, estudiante_id, nota1, nota2, nota3, nota4, nota5, nota6, total, promedio, examen
            };
            detalles.push(aux);
 

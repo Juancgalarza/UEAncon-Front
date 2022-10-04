@@ -3,6 +3,7 @@ _init();
 
 function _init() {
     cargarParciales();
+    cargarQuimestres();
     cargarData();
     imprimir();
 }
@@ -44,9 +45,47 @@ function cargarParciales() {
     });
 }
 
+function cargarQuimestres() {
+    $.ajax({
+        // la URL para la petición
+        url: urlServidor + 'quimestre/listar',
+        // especifica si será una petición POST o GET
+        type: 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+        success: function (response) {
+            //console.log(response);
+            if (response.status) {
+                let option = '<option value=0>Seleccione un Quimestre</option>';
+
+                response.quimestre.forEach(element => {
+                    option += `<option value=${element.id}>${element.quimestre}</option>`;
+                });
+                $('#select-quimestre').html(option);
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No hay quimestres disponibles',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                })
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete: function (jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+
+    });
+}
+
 function cargarData(){
     $('#btn-consulta').click(function(){
         let parcial_id = $('#select-parcial option:selected').val();
+        let quimestre_id = $('#select-quimestre option:selected').val();
         let estudiante_id = JSON.parse(localStorage.getItem('sesion-estudiante'));
         
         if(parcial_id == 0){
@@ -57,10 +96,23 @@ function cargarData(){
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
             });
+        }else
+        if (quimestre_id == 0) {
+            Swal.fire({
+                title: 'Reporte',
+                text: 'Debe seleccionar un Quimestre',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
         }else{
+            let parcial_texto = $("#select-parcial").find("option:selected").text();
+            $('#parcial-data').text(parcial_texto);
+            let quimestre_texto = $("#select-quimestre").find("option:selected").text();
+            $('#quimestre-data').text(quimestre_texto);
             $.ajax({
                 // la URL para la petición
-                url : urlServidor + 'detalle_calificaciones/reportexParcial/' + parcial_id + '/' + estudiante_id,
+                url : urlServidor + 'detalle_calificaciones/reportexParcial/' + parcial_id + '/' + quimestre_id + '/' + estudiante_id,
                 // especifica si será una petición POST o GET
                 type : 'GET',
                 // el tipo de información que se espera de respuesta

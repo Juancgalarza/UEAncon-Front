@@ -14,4 +14,8 @@ class ReportesController{
         require_once 'views/contents/reportePorParcial.php';
     }
 
+    public function quimestral(){
+        require_once 'views/contents/reporteQuimestral.php';
+    }
+
 }
