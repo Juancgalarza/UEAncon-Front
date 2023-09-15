@@ -76,7 +76,7 @@ function cargarCursos() {
                 let option = '<option value=0>Seleccione el Curso</option>';
 
                 response.curso.forEach(element => {
-                    option += `<option value=${element.id}>${element.nombre_curso}, Capacidad: ${element.capacidad}, Total Estudiantes: ${element.total_estudiantes}</option>`;
+                    option += `<option value=${element.id}>${element.nombre_curso}</option>`;
                 });
                 $('#select-curso-est').html(option);
             } else {
@@ -113,7 +113,7 @@ function cargarParalelos() {
                 let option = '<option value=0>Seleccione el Paralelo</option>';
 
                 response.paralelo.forEach(element => {
-                    option += `<option value=${element.id}>${element.tipo}</option>`;
+                    option += `<option value=${element.id}>${element.tipo}, Capacidad: ${element.capacidad}, Total Estudiantes: ${element.total_estudiantes}</option>`;
                 });
                 $('#select-paralelo-est').html(option);
             } else {
@@ -411,6 +411,8 @@ function guardandoUsuarioEstudiante(json) {
                 });
                 $('#form-nuevo-estudiante')[0].reset();
                 cargarCursos();
+                cargarParalelos();
+                $(location).attr('href', urlCliente + 'login');
             }else{
                 Swal.fire({
                     title: 'Estudiantes',
@@ -467,5 +469,4 @@ function guardandoUsuarioEstudiante(json) {
             }
         });
     }
-    $(location).attr('href', urlCliente + 'login');
 }

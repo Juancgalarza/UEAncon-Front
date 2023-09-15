@@ -27,9 +27,10 @@
     <div class="row">
         <div class="col-12">
             <div class="tile">
-                <h4 class="tile-title mt-1 text-center">Nómina De Estudiantes Matriculados en <span
-                        class="text-primary" id="materia-en"></span> - Curso: <span class="text-primary"
-                        id="curso-en"></span> Paralelo: <span class="text-primary" id="paralelo-en"></span></h4>
+                <h4 class="tile-title mt-1 text-center">Nómina De Estudiantes Matriculados en <span class="text-primary"
+                        id="materia-en"></span> - Curso: <span class="text-primary" id="curso-en"></span> Paralelo:
+                    <span class="text-primary" id="paralelo-en"></span>
+                </h4>
                 <h5 class="text-center">Jornada: <span class="text-primary" id="jornada-en"></span></h5>
                 <div class="tile-body">
                     <table id="tabla-estudiantes" class="table table-bordered table-striped table-sm text-center">
@@ -101,9 +102,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group row">
-                                            <label class="col-form-label col-md-4">Parcial</label>
+                                            <label class="col-form-label col-md-4">Quimestre</label>
                                             <div class="col-md-5">
-                                                <select id="select-parcial" class="form-control form-control-sm">
+                                                <select id="select-quimestre" class="form-control form-control-sm">
 
                                                 </select>
                                             </div>
@@ -113,9 +114,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group row">
-                                            <label class="col-form-label col-md-4">Quimestre</label>
+                                            <label class="col-form-label col-md-4">Parcial</label>
                                             <div class="col-md-5">
-                                                <select id="select-quimestre" class="form-control form-control-sm">
+                                                <select id="select-parcial" class="form-control form-control-sm">
 
                                                 </select>
                                             </div>
@@ -179,16 +180,6 @@
                                                     id="nota6-est">
                                             </div>
                                         </div>
-                                        <hr class="bg-primary">
-                                        <div class="form-group row">
-                                            <label class="col-form-label col-md-4">Exámen</label>
-                                            <div class="col-md-5">
-                                                <input type="text"
-                                                    onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                                                    class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
-                                                    id="examen-est">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -207,6 +198,86 @@
     </div>
 </div>
 
+<!-- MODAL EXAMEN -->
+<div class="modal fade" id="calificarExamen" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="modalMateriaLabel">Calificar Exámen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="h5">
+                                <b>Estudiante:</b>
+                                <span id="nombre-estudiante-ex"> </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12 col-md-6">
+                            <span class="h5">
+                                <b>Curso:</b>
+                                <span id="nombre-curso-ex">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="h5">
+                                <b>Paralelo:</b>
+                                <span id="nombre-paralelo-ex">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <input type="hidden" id="estudiante-id-ex">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4">Quimestre</label>
+                                        <div class="col-md-5">
+                                            <select id="select-quimestre-ex" class="form-control form-control-sm">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="bg-primary" style="margin-top: 0px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4">Exámen</label>
+                                        <div class="col-md-5">
+                                            <input type="text"
+                                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
+                                                class="form-control form-control-sm" placeholder="Ejemplo: 9.50"
+                                                id="examen-est">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button id="btn-calificar-examen" class="btn btn-primary"><i
+                                            class="fa fa-check mr-2"></i>Calificar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="<?=BASE?>views/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=BASE?>views/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -217,4 +288,4 @@
 <script src="<?=BASE?>views/plugins/jszip/jszip.min.js"></script>
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 
-<script src="<?=BASE?>views/dist/js/scripts/misEstudiantes.js?ver=1.1.1.1"></script>
+<script src="<?=BASE?>views/dist/js/scripts/misEstudiantes.js?ver=1.1.1.2"></script>

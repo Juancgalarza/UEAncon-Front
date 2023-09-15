@@ -17,7 +17,22 @@ class RegistrosController{
     public function asignardocentemateria(){
         require_once 'views/contents/asignarDocenteMateria.php';
     }
+
+    public function nuevoPeriodo(){
+        require_once 'views/contents/nuevoPeriodo.php';
+    }
+
+    public function nuevoCurso(){
+        require_once 'views/contents/nuevoCurso.php';
+    }
+
+    public function nuevoParalelo(){
+        require_once 'views/contents/nuevoParalelo.php';
+    }
+
+    public function nuevaMateria(){
+        require_once 'views/contents/nuevaMateria.php';
+    }
     
- 
 
 }

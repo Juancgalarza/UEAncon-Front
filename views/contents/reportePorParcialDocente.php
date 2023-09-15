@@ -2,26 +2,50 @@
 
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-clipboard"></i> Reporte Quimestral</h1>
+            <h1><i class="fa fa-clipboard"></i> Reporte Parcial</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="<?=BASE?>reportes/quimestral"> Reporte Quimestrall</a></li>
+            <li class="breadcrumb-item"><a href="<?=BASE?>reportes/parcialDoc"> Reporte Parcial</a></li>
         </ul>
     </div>
 
     <div class="row">
-        <div class="col-6 col-md-3 col-lg-3 form-group ">
+        <div class="col-6 col-md-3 col-lg-2 form-group ">
+            <label for="">Materias</label>
+            <select id="select-materia" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group ">
             <label for="">Quimestres</label>
             <select id="select-quimestre" class="form-control">
 
             </select>
         </div>
-        <div class="col-6 col-md-4 col-lg-3 form-group ">
+        <div class="col-6 col-md-3 col-lg-2 form-group ">
+            <label for="">Parciales</label>
+            <select id="select-parcial" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group ">
+            <label for="">Curso</label>
+            <select id="select-curso" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group ">
+            <label for="">Paralelo</label>
+            <select id="select-paralelo" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-2 col-lg-2 form-group">
             <button class="btn btn-dark" id="btn-consulta" style="margin-top: 28px;">
-                <i class=" fa fa-search  "></i> Consultar</button>
+                <i class=" fa fa-search  "></i></button>
             <button class="btn btn-primary" id="btn-imprimir" style="margin-top: 28px;">
-                <i class="fa fa-file-pdf-o"></i> PDF</button>
+                <i class="fa fa-file-pdf-o"></i></button>
         </div>
     </div>
 
@@ -33,8 +57,8 @@
                 </div>
                 <div class="col-12 col-md-6 text-center">
                     <h3><b>UNIDAD EDUCATIVA "ANCÓN"</b></h3>
-                    <h6>Reporte Quimestral</h6>
-                    <span> <b>Reporte Del</b> <b id="quimestre-data"></b></span>
+                    <h6>Reporte Por Parcial</h6>
+                    <span> <b id="parcial-data"></b> <b>Del</b> <b id="quimestre-data"></b></span>
                 </div>
                 <div class="col-12 col-md-2">
                     <img src="<?=BASE?>views/dist/img/logo.png" width="100px">
@@ -50,14 +74,14 @@
                                     <thead>
                                         <tr class="bg-light">
                                             <th>#</th>
-                                            <th>Materias</th>
-                                            <th>Parcial 1</th>
-                                            <th>Parcial 2</th>
-                                            <th>Parcial 3</th>
-                                            <th>Exámen</th>
-                                            <th>PP. 80%</th>
-                                            <th>EX. 20%</th>
-                                            <th>Promedio Quimestre</th>
+                                            <th>Estudiante</th>
+                                            <th>Tarea 1</th>
+                                            <th>Tarea 2</th>
+                                            <th>Lección 1</th>
+                                            <th>Lección 2</th>
+                                            <th>Proyecto</th>
+                                            <th>Evaluación</th>
+                                            <th>Promedio</th>
                                         </tr>
                                     </thead>
                                     <tbody id="body-reporte-data">
@@ -65,13 +89,13 @@
                                     </tbody>
                                     <tfoot>
                                         <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th class="text-primary">Promedio General: </th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
                                         <th id="total-prom" class="text-primary"></th>
                                     </tfoot>
                                 </table>
@@ -94,4 +118,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="<?=BASE?>views/plugins/html2pdf/html2pdf.bundle.js"></script>
 
-<script src="<?=BASE?>views/dist/js/scripts/reporteQuimestral.js?ver=1.1.1.2"></script>
+<script src="<?=BASE?>views/dist/js/scripts/reportePorParcialDocente.js"></script>

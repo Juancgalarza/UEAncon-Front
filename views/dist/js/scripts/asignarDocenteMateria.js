@@ -19,7 +19,7 @@ function _init() {
 function cargarPeriodos() {
     $.ajax({
         // la URL para la petición
-        url: urlServidor + 'periodo/listar',
+        url: urlServidor + 'periodo/listarActivos',
         // especifica si será una petición POST o GET
         type: 'GET',
         // el tipo de información que se espera de respuesta

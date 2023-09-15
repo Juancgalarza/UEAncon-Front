@@ -10,6 +10,7 @@ function _init() {
     cargarParciales();
     cargarQuimestres();
     guardarCalificaciones();
+    guardarCalificacionExamen();
 }
 
 function cargarEncabezadoMateria(){
@@ -205,6 +206,7 @@ function cargarQuimestres() {
                     option += `<option value=${element.id}>${element.quimestre}</option>`;
                 });
                 $('#select-quimestre').html(option);
+                $('#select-quimestre-ex').html(option);
             } else {
                 Swal.fire({
                     title: 'Error!',
@@ -230,6 +232,11 @@ function calificarEstudiante(id) {
     cargarDataEstudiante(id);
 }
 
+function calificarEstudianteExamen(id) {
+    $('#calificarExamen').modal('show');
+    cargarDataEstudianteExamen(id);
+}
+
 function cargarDataEstudiante(id) {
     let estudiante_id = id;
     let curso_id = localStorage.getItem('_curso_id');
@@ -247,8 +254,39 @@ function cargarDataEstudiante(id) {
                 $('#curso-id').val(response.estudiante[0].curso.id);
                 $('#paralelo-id').val(response.estudiante[0].paralelo.id);
                 $('#nombre-estudiante').text(response.estudiante[0].persona.nombres + ' ' + response.estudiante[0].persona.apellidos);
+                $('#nombre-estudiante-ex').text(response.estudiante[0].persona.nombres + ' ' + response.estudiante[0].persona.apellidos);
                 $('#nombre-curso').text(response.estudiante[0].curso.nombre_curso);
+                $('#nombre-curso-ex').text(response.estudiante[0].curso.nombre_curso);
                 $('#nombre-paralelo').text(response.estudiante[0].paralelo.tipo);
+                $('#nombre-paralelo-ex').text(response.estudiante[0].paralelo.tipo);
+            }
+        },
+        error : function(jqXHR, status, error) {
+            console.log('Disculpe, existió un problema');
+        },
+        complete : function(jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+}
+
+function cargarDataEstudianteExamen(id) {
+    let estudiante_id = id;
+    let curso_id = localStorage.getItem('_curso_id');
+    let paralelo_id = localStorage.getItem('_paralelo_id');
+    $.ajax({
+        // la URL para la petición
+        url : urlServidor + 'estudiantes/estudianteCalificar/' + estudiante_id + '/' + curso_id + '/' + paralelo_id,
+        // especifica si será una petición POST o GET
+        type : 'GET',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        success : function(response) {
+            if(response.status){
+                $('#estudiante-id-ex').val(response.estudiante[0].id);
+                $('#nombre-estudiante-ex').text(response.estudiante[0].persona.nombres + ' ' + response.estudiante[0].persona.apellidos);
+                $('#nombre-curso-ex').text(response.estudiante[0].curso.nombre_curso);
+                $('#nombre-paralelo-ex').text(response.estudiante[0].paralelo.tipo);
             }
         },
         error : function(jqXHR, status, error) {
@@ -278,12 +316,11 @@ function guardarCalificaciones(){
         let nota4 = $('#nota4-est').val();
         let nota5 = $('#nota5-est').val();
         let nota6 = $('#nota6-est').val();
-        let examen = $('#examen-est').val();
         let totalf = Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4) + Number(nota5) + Number(nota6);
         let total = totalf.toFixed(2);
         let promf = total / 6 ;
         let promedio = promf.toFixed(2);
-        let promedio_total = promedio;
+        let promedio_parcial = promedio;
         
         if(parcial_id == 0){
             Swal.fire({
@@ -358,10 +395,10 @@ function guardarCalificaciones(){
                 confirmButtonColor: '#004a43'
             });
         }else
-        if(examen.length == 0){
+        if(nota1 > 10 || nota2 > 10 || nota3 > 10 || nota4 > 10 || nota5 > 10 || nota6 > 10){
             Swal.fire({
                 title: 'Calificaciones',
-                text: 'Debe ingresar una Calificación al Exámen',
+                text: 'La Calificación ingresada es mayor a 10',
                 icon: 'warning',
                 confirmButtonText: 'Ok',
                 confirmButtonColor: '#004a43'
@@ -370,17 +407,20 @@ function guardarCalificaciones(){
             let detalles = [];
 
             let aux = {
-                parcial_id, quimestre_id, estudiante_id, nota1, nota2, nota3, nota4, nota5, nota6, total, promedio, examen
+                nota1, nota2, nota3, nota4, nota5, nota6, total, promedio
            };
            detalles.push(aux);
 
             let json = {
                 calificaciones:{
+                    estudiante_id,
                     docente_id,
                     materia_id,
                     curso_id,
                     paralelo_id,
-                    promedio_total
+                    parcial_id,
+                    quimestre_id,
+                    promedio_parcial
                 },
                 detalle_calificaciones:detalles
             }
@@ -431,3 +471,90 @@ function guardandoCalificaciones(json) {
     $('#calificarEstudiante').modal('hide');
 }
 
+function guardarCalificacionExamen(){
+    $('#btn-calificar-examen').click(function(){
+
+        let quimestre_id = $('#select-quimestre-ex option:selected').val();
+        let estudiante_id = $('#estudiante-id-ex').val();
+        let materia_id = localStorage.getItem('_materia_id');
+        let nota = $('#examen-est').val();
+        
+        if(quimestre_id == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe seleccionar un Quimestre',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota.length == 0){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'Debe ingresar una Calificación al Exámen',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else
+        if(nota > 10){
+            Swal.fire({
+                title: 'Calificaciones',
+                text: 'La Calificación ingresada es mayor a 10',
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#004a43'
+            });
+        }else{
+            let json = {
+                examen:{
+                    quimestre_id,
+                    estudiante_id,
+                    materia_id,
+                    nota
+                },
+            }
+            guardandoCalificacionExamen(json);
+        }
+    });
+}
+
+function guardandoCalificacionExamen(json) {
+    $.ajax({
+        // la URL para la petición
+        url: urlServidor + 'examen/calificarExamenEstudiante',
+        // especifica si será una petición POST o GET
+        type: 'POST',
+        data: 'data=' + JSON.stringify(json),
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+        success: function (response) {
+            if (response.status) {
+                Swal.fire({
+                    title: 'Calificaciones',
+                    text: response.mensaje,
+                    icon: 'success',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                });
+                $('#calificar-estudiante-examen')[0].reset();
+                $('#estudiante-id-ex').val('');
+            } else {
+                Swal.fire({
+                    title: 'Calificaciones',
+                    text: response.mensaje,
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#004a43'
+                });
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log('Existió un problema, reviselo..!');
+        },
+        complete: function (jqXHR, status) {
+            // console.log('Petición realizada');
+        }
+    });
+    $('#calificarExamen').modal('hide');
+}

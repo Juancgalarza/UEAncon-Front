@@ -18,4 +18,21 @@ class ReportesController{
         require_once 'views/contents/reporteQuimestral.php';
     }
 
+    public function anual(){
+        require_once 'views/contents/reporteAnual.php';
+    }
+
+    public function parcialDoc(){
+        require_once 'views/contents/reportePorParcialDocente.php';
+    }
+
+    public function quimestralDoc(){
+        require_once 'views/contents/reporteQuimestralDocente.php';
+    }
+
+    public function anualDoc(){
+        require_once 'views/contents/reporteAnualDocente.php';
+    }
+
+
 }

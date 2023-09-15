@@ -6,22 +6,40 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="<?=BASE?>reportes/quimestral"> Reporte Quimestrall</a></li>
+            <li class="breadcrumb-item"><a href="<?=BASE?>reportes/quimestralDoc"> Reporte Quimestrall</a></li>
         </ul>
     </div>
 
     <div class="row">
-        <div class="col-6 col-md-3 col-lg-3 form-group ">
+        <div class="col-6 col-md-3 col-lg-2 form-group">
+            <label for="">Materias</label>
+            <select id="select-materia" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group">
             <label for="">Quimestres</label>
             <select id="select-quimestre" class="form-control">
 
             </select>
         </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group">
+            <label for="">Curso</label>
+            <select id="select-curso" class="form-control">
+
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 form-group">
+            <label for="">Paralelo</label>
+            <select id="select-paralelo" class="form-control">
+
+            </select>
+        </div>
         <div class="col-6 col-md-4 col-lg-3 form-group ">
             <button class="btn btn-dark" id="btn-consulta" style="margin-top: 28px;">
-                <i class=" fa fa-search  "></i> Consultar</button>
+                <i class=" fa fa-search  "></i></button>
             <button class="btn btn-primary" id="btn-imprimir" style="margin-top: 28px;">
-                <i class="fa fa-file-pdf-o"></i> PDF</button>
+                <i class="fa fa-file-pdf-o"></i></button>
         </div>
     </div>
 
@@ -50,7 +68,7 @@
                                     <thead>
                                         <tr class="bg-light">
                                             <th>#</th>
-                                            <th>Materias</th>
+                                            <th>Estudiante</th>
                                             <th>Parcial 1</th>
                                             <th>Parcial 2</th>
                                             <th>Parcial 3</th>
@@ -94,4 +112,4 @@
 <script src="<?=BASE?>views/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="<?=BASE?>views/plugins/html2pdf/html2pdf.bundle.js"></script>
 
-<script src="<?=BASE?>views/dist/js/scripts/reporteQuimestral.js?ver=1.1.1.2"></script>
+<script src="<?=BASE?>views/dist/js/scripts/reporteQuimestralDocente.js?ver=1.1.1.1"></script>

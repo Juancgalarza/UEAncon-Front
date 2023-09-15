@@ -124,7 +124,7 @@ $(function(){
         switch(rol){
             case 1:
                 //Administrador 
-                $(location).attr('href', urlCliente + 'usuario/nuevo');
+                $(location).attr('href', urlCliente + 'inicio/administrador');
                 break;
             case 2:
                 //Docente 

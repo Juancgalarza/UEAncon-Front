@@ -9,7 +9,7 @@ function cargarDesgloseCalificacion() {
 
     $.ajax({
         // la URL para la petición
-        url: urlServidor + '/calificaciones/desgloseCalificacion/' + docente_id,
+        url: urlServidor + 'calificaciones/desgloseCalificacion/' + docente_id,
         // especifica si será una petición POST o GET
         type: 'GET',
         // el tipo de información que se espera de respuesta
@@ -37,7 +37,6 @@ function cargarDesgloseCalificacion() {
                                         <th>Lección 2</th>
                                         <th>Proyecto</th>
                                         <th>Evaluación</th>
-                                        <th>Exámen</th>
                                         <th>Promedio</th>
                                     </tr>
                                 </thead>
@@ -45,14 +44,13 @@ function cargarDesgloseCalificacion() {
                                     <tr>
                                         <th>${i}</th>
                                         <th>${element.estudiante.nombres} ${element.estudiante.apellidos}</th>
-                                        <th>${element.detalle.parcial.parcial}</th>
+                                        <th>${element.parcial}</th>
                                         <th>${element.detalle.nota1}</th>
                                         <th>${element.detalle.nota2}</th>
                                         <th>${element.detalle.nota3}</th>
                                         <th>${element.detalle.nota4}</th>
                                         <th>${element.detalle.nota5}</th>
                                         <th>${element.detalle.nota6}</th>
-                                        <th>${element.detalle.examen}</th>
                                         <th>${element.detalle.promedio}</th>
                                     </tr>
                                 </tbody>
